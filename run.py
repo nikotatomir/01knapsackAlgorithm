@@ -3,6 +3,7 @@
 import numpy as np
 
 from parameterCheck import parameterCheck
+from knapsackAlgorithm import knapsackAlgorithm
 
 #----------USER-DEFINED-PARAMETERS----------#
 maxWeightCapacity = 7 # in kilograms, must be integer
@@ -20,13 +21,23 @@ manualValues = np.array([2,2,4,5,3], dtype = np.int32) # in dollars
 #-------------------------------------------#
 
 if generationMethod == 'manual':
+	# do parameter check to see if all inputs are valid
 	parameterCheck(numberOfItems, maxWeightCapacity, weights = manualWeights, values = manualValues)
-	#solve = knapsackAlgorithm(numberOfItems, maxWeightCapacity, weights, values)
+	# solve knapsack problem
+	solve = knapsackAlgorithm(numberOfItems, maxWeightCapacity, manualWeights, manualValues)
 elif generationMethod == 'random':
+	# do parameter check to see if all inputs are valid
 	parameterCheck(numberOfItems, maxWeightCapacity, randomWeightLimit = randomItemWeightLimit, randomValueLimit = randomItemValueLimit)
+	# get random weights and values arrays
 	randomWeights = np.array([np.random.randint(1, randomItemWeightLimit) for i in range(numberOfItems)], dtype = np.int32)
 	randomValues = np.array([np.random.randint(1, randomItemValueLimit) for i in range(numberOfItems)], dtype = np.int32)
 	print(randomWeights, randomValues)
-	#solve = knapsackAlgorithm(numberOfItems, maxWeightCapacity, weights, values)
+	# solve knapsack problem
+	solve = knapsackAlgorithm(numberOfItems, maxWeightCapacity, randomWeights, randomValues)
 else:
 	pass
+
+a = solve.getKnapsackItemsIndecies()
+print(a)
+
+print(solve.getValueMatrix())
