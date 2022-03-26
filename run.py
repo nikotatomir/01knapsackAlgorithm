@@ -4,12 +4,13 @@ import numpy as np
 
 from parameterCheck import parameterCheck
 from knapsackAlgorithm import knapsackAlgorithm
+from postProcess import postProcess
 
 #----------USER-DEFINED-PARAMETERS----------#
 maxWeightCapacity = 7 # in kilograms, must be integer
 numberOfItems = 5 # number of items --> the size of the weights/values arrays defined below must be equal to the numberOfItems variable
 
-generationMethod = 'random' # 'manual' or 'random' --> specifices how the weights/values of the knapsack problem are generated
+generationMethod = 'manual' # 'manual' or 'random' --> specifices how the weights/values of the knapsack problem are generated
 
 # If generationMethod == 'random', define weights/values upper limits below
 randomItemWeightLimit = 7
@@ -24,20 +25,22 @@ if generationMethod == 'manual':
 	# do parameter check to see if all inputs are valid
 	parameterCheck(numberOfItems, maxWeightCapacity, weights = manualWeights, values = manualValues)
 	# solve knapsack problem
-	solve = knapsackAlgorithm(numberOfItems, maxWeightCapacity, manualWeights, manualValues)
+	solution = knapsackAlgorithm(numberOfItems, maxWeightCapacity, manualWeights, manualValues)
 elif generationMethod == 'random':
 	# do parameter check to see if all inputs are valid
 	parameterCheck(numberOfItems, maxWeightCapacity, randomWeightLimit = randomItemWeightLimit, randomValueLimit = randomItemValueLimit)
 	# get random weights and values arrays
 	randomWeights = np.array([np.random.randint(1, randomItemWeightLimit) for i in range(numberOfItems)], dtype = np.int32)
 	randomValues = np.array([np.random.randint(1, randomItemValueLimit) for i in range(numberOfItems)], dtype = np.int32)
-	print(randomWeights, randomValues)
 	# solve knapsack problem
-	solve = knapsackAlgorithm(numberOfItems, maxWeightCapacity, randomWeights, randomValues)
+	solution = knapsackAlgorithm(numberOfItems, maxWeightCapacity, randomWeights, randomValues)
 else:
 	pass
 
-a = solve.getKnapsackItemsIndecies()
-print(a)
+pp = postProcess(solution)
+pp.printProblemSetupToScreen()
+pp.printProblemSolutionToScreen()
 
-print(solve.getValueMatrix())
+# chosenItems = solution.getKnapsackItemsIndecies()
+# print(chosenItems)
+# print('banankgfkfghaa'.center(20, '0'))

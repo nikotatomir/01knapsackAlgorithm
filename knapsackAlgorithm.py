@@ -10,8 +10,6 @@ class knapsackAlgorithm():
 		self.weights = weights
 		self.values = values
 
-		self.valueMatrix = self.getValueMatrix()
-
 	# function that constructs the valueMatrix based on the item weights & values
 	def getValueMatrix(self):
 		valueMatrix = np.zeros((self.numberOfItems + 1 , self.maxWeightCapacity + 1), dtype = np.int32)
@@ -26,17 +24,18 @@ class knapsackAlgorithm():
 
 	# function that extracts the items that provide the maximum total value given the knapsack maximum weight capacity
 	def getKnapsackItemsIndecies(self):
-		knapsackItemIndecies = []
+		valueMatrix = self.getValueMatrix()
+		knapsackItemsIndecies = []
 		columnIndex = -1
 		for i in reversed(range(1, self.numberOfItems + 1)):
-			if self.valueMatrix[i, columnIndex] == self.valueMatrix[i-1, columnIndex]:
+			if valueMatrix[i, columnIndex] == valueMatrix[i-1, columnIndex]:
 				continue
 			else:
-				knapsackItemIndecies.append(i-1)
+				knapsackItemsIndecies.append(i-1)
 				columnIndex -= self.weights[i-1]
 
-			knapsackItemIndecies.sort()
+			knapsackItemsIndecies.sort()
 
-		return knapsackItemIndecies
+		return knapsackItemsIndecies
 
 
