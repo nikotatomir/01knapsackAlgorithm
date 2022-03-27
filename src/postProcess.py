@@ -63,12 +63,12 @@ class postProcess:
 		for i in range(self.solution.numberOfItems):
 			if i in self.solution.knapsackItemsIndecies:
 				if count == 0:
-					plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#de4747', zorder=2, label = 'Chosen Items')
+					plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#0c4b33', zorder=2, label = '$Knapsack$ $Items$')
 				else:
-					plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#de4747', zorder=2)
+					plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#0c4b33', zorder=2)
 				count += 1
 			else:
-				plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#ffd8d8', zorder=2)
+				plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#c9f0dd', zorder=2)
 		
 
 		plt.xticks(xloc, [f'$Item$ ${i+1}$ $({self.solution.weights[i]}kg)$' for i in range(self.solution.numberOfItems)], rotation = -60)
