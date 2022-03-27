@@ -1,5 +1,3 @@
-
-
 import numpy as np
 
 from parameterCheck import parameterCheck
@@ -14,7 +12,7 @@ generationMethod = 'manual' # 'manual' or 'random' --> specifices how the weight
 
 # If generationMethod == 'random', define weights/values upper limits below
 randomItemWeightLimit = 7
-randomItemValueLimit = 100
+randomItemValueLimit = 5
 
 # If generationMethod == 'manual', define weights/values below
 manualWeights = np.array([3,1,3,4,2], dtype = np.int32) # in kilograms
@@ -30,17 +28,19 @@ elif generationMethod == 'random':
 	# do parameter check to see if all inputs are valid
 	parameterCheck(numberOfItems, maxWeightCapacity, randomWeightLimit = randomItemWeightLimit, randomValueLimit = randomItemValueLimit)
 	# get random weights and values arrays
-	randomWeights = np.array([np.random.randint(1, randomItemWeightLimit) for i in range(numberOfItems)], dtype = np.int32)
-	randomValues = np.array([np.random.randint(1, randomItemValueLimit) for i in range(numberOfItems)], dtype = np.int32)
+	randomWeights = np.array([np.random.randint(1, randomItemWeightLimit+1) for i in range(numberOfItems)], dtype = np.int32)
+	randomValues = np.array([np.random.randint(1, randomItemValueLimit+1) for i in range(numberOfItems)], dtype = np.int32)
 	# solve knapsack problem
 	solution = knapsackAlgorithm(numberOfItems, maxWeightCapacity, randomWeights, randomValues)
 else:
 	pass
 
+# initialize postProcess class
 pp = postProcess(solution)
+# print to screen the list of possible knapsack items with their corresponding weights and values
 pp.printProblemSetupToScreen()
+# print to screen the chosen list of knapsack items with their corresponding weights and values as well as the total weight and value of the knapsack
 pp.printProblemSolutionToScreen()
+# plot the results of the knapsack problem to a bar graph
+pp.plotResults()
 
-# chosenItems = solution.getKnapsackItemsIndecies()
-# print(chosenItems)
-# print('banankgfkfghaa'.center(20, '0'))
