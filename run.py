@@ -17,8 +17,8 @@ randomItemValueLimit = 10
 # If generationMethod == 'manual', define weights/values below
 manualWeights = np.array([3,1,3,4,2], dtype = np.int32) # in kilograms
 manualValues = np.array([2,2,4,5,3], dtype = np.int32) # in dollars
-#-------------------------------------------#
 
+#---------------SOLUTION--------------------#
 if generationMethod == 'manual':
 	# do parameter check to see if all inputs are valid
 	parameterCheck(numberOfItems, maxWeightCapacity, weights = manualWeights, values = manualValues)
@@ -35,6 +35,7 @@ elif generationMethod == 'random':
 else:
 	pass
 
+#--------------POST-PROCESS-----------------#
 # initialize postProcess class
 pp = postProcess(solution)
 # print to screen the list of possible knapsack items with their corresponding weights and values

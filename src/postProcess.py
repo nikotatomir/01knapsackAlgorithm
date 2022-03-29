@@ -50,6 +50,7 @@ class postProcess:
 		
 		print(postProcess.dashes)
 		print(totalName, totalWeight, totalValue, sep=' | ')
+		print()
 
 	# function that plots the results of the knapsack problem on a bar graph
 	def plotResults(self):
