@@ -1,0 +1,5 @@
+name: 01knapsack
+dependencies:
+  - python=3.8
+  - numpy
+  - matplotlib
