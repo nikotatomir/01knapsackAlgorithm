@@ -6,13 +6,13 @@ from src.postProcess import postProcess
 
 #----------USER-DEFINED-PARAMETERS----------#
 maxWeightCapacity = 7 # in kilograms, must be integer
-numberOfItems = 20 # number of items --> the size of the weights/values arrays defined below must be equal to the numberOfItems variable
+numberOfItems = 5 # number of items --> the size of the weights/values arrays defined below must be equal to the numberOfItems variable
 
-generationMethod = 'random' # 'manual' or 'random' --> specifices how the weights/values of the knapsack problem are generated
+generationMethod = 'manual' # 'manual' or 'random' --> specifices how the weights/values of the knapsack problem are generated
 
 # If generationMethod == 'random', define weights/values upper limits below
 randomItemWeightLimit = 7
-randomItemValueLimit = 20
+randomItemValueLimit = 10
 
 # If generationMethod == 'manual', define weights/values below
 manualWeights = np.array([3,1,3,4,2], dtype = np.int32) # in kilograms

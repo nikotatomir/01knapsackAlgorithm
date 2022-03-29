@@ -56,7 +56,7 @@ class postProcess:
 		plt.figure(1,figsize=(12.0,4.0))
 		plt.grid(zorder = 0, which='major', axis='y', linewidth=0.75, linestyle='-', color='0.75')
 		
-		barWidth = 0.125
+		barWidth = 1
 		xloc = [2*i*barWidth for i in range(self.solution.numberOfItems)]
 
 		count = 0
@@ -70,10 +70,14 @@ class postProcess:
 			else:
 				plt.bar(xloc[i], self.solution.values[i], width = barWidth, color = '#c9f0dd', zorder=2)
 		
+		offset = 0.03*max(self.solution.values)
+		for i in range(self.solution.numberOfItems):
+			plt.text(xloc[i], self.solution.values[i]+offset, f'{self.solution.values[i]}\$/{self.solution.weights[i]}kg', ha = 'center', va = 'center', fontsize = 6)
 
-		plt.xticks(xloc, [f'$Item$ ${i+1}$ $({self.solution.weights[i]}kg)$' for i in range(self.solution.numberOfItems)], rotation = -60)
-		plt.legend(loc = 'upper right')
-		plt.ylim([0,max(self.solution.values)+5])
+		plt.xticks(xloc, [f'{i+1}' for i in range(self.solution.numberOfItems)], rotation = 0)
+		plt.legend(loc = 'best')
+		plt.ylim([0 , max(self.solution.values) + int(0.25*max(self.solution.values)) ])
+		plt.xlabel('$Items$')
 		plt.ylabel('$Value$ $(in$ $\$)$')
 		plt.title(f"$0/1$ $Knapsack$ $Solution$ $\\rightarrow$ $Total$ $Weight$ $=$ {self.solution.knapsackItems['total']['weight']}$kg$ $(max$ {self.solution.maxWeightCapacity}$kg)$, $Value$ $=$ {self.solution.knapsackItems['total']['value']}\$")
 		plt.savefig('01knapsackSolution.png', bbox_inches='tight', dpi = 250)
